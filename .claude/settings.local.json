@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python *)",
+      "Bash(dir /b \"C:\\\\Users\\\\ahmed\\\\maskai\\\\MyMcp\")",
+      "PowerShell(& \"C:\\\\Users\\\\ahmed\\\\maskai\\\\MyMcp\\\\.venv\\\\Scripts\\\\python.exe\" -c \"import sys; print\\(sys.version\\); from mcp.server.fastmcp import FastMCP; print\\('mcp ok'\\)\" 2>&1)",
+      "PowerShell(claude mcp *)",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri \"http://127.0.0.1:8000/mcp\" -Method Post -Headers @{ \"Content-Type\"=\"application/json\"; \"Accept\"=\"application/json, text/event-stream\" } -Body '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"initialize\",\"params\":{\"protocolVersion\":\"2024-11-05\",\"capabilities\":{},\"clientInfo\":{\"name\":\"probe\",\"version\":\"0.0.1\"}}}' -UseBasicParsing; Write-Output \"STATUS: $\\($r.StatusCode\\)\"; Write-Output $r.Content } catch { Write-Output \"ERROR: $\\($_.Exception.Message\\)\"; if \\($_.Exception.Response\\) { Write-Output \"HTTP STATUS: $\\([int]$_.Exception.Response.StatusCode\\)\" } })",
+      "mcp__taiga__taiga_get_me",
+      "mcp__taiga__taiga_list_projects",
+      "mcp__taiga__taiga_get_project",
+      "mcp__taiga__taiga_list_tasks",
+      "mcp__taiga__taiga_list_task_statuses",
+      "mcp__taiga__taiga_update_task",
+      "mcp__taiga__taiga_list_userstories",
+      "mcp__taiga__taiga_get_history",
+      "mcp__taiga__taiga_update_userstory",
+      "mcp__taiga__taiga_get_userstory",
+      "Bash(python -c \"import glob,os,json; f=sorted\\(glob.glob\\('*history*'\\),key=os.path.getmtime\\)[-1]; print\\(f\\); d=json.load\\(open\\(f,encoding='utf-8'\\)\\); print\\(json.dumps\\(d,indent=1\\)[:4000]\\)\")"
+    ]
+  }
+}

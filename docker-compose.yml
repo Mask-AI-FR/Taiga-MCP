@@ -1,0 +1,14 @@
+services:
+  taiga-mcp:
+    build: .
+    image: taiga-mcp-server
+    container_name: taiga-mcp-server
+    restart: unless-stopped
+    # Loads TAIGA_BASE_URL and credentials/token from your local .env file
+    env_file:
+      - .env
+    environment:
+      MCP_HOST: 0.0.0.0
+      MCP_PORT: 8000
+    ports:
+      - "8000:8000"

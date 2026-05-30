@@ -16,7 +16,13 @@
       "mcp__taiga__taiga_get_history",
       "mcp__taiga__taiga_update_userstory",
       "mcp__taiga__taiga_get_userstory",
-      "Bash(python -c \"import glob,os,json; f=sorted\\(glob.glob\\('*history*'\\),key=os.path.getmtime\\)[-1]; print\\(f\\); d=json.load\\(open\\(f,encoding='utf-8'\\)\\); print\\(json.dumps\\(d,indent=1\\)[:4000]\\)\")"
+      "Bash(python -c \"import glob,os,json; f=sorted\\(glob.glob\\('*history*'\\),key=os.path.getmtime\\)[-1]; print\\(f\\); d=json.load\\(open\\(f,encoding='utf-8'\\)\\); print\\(json.dumps\\(d,indent=1\\)[:4000]\\)\")",
+      "Bash(docker build *)",
+      "Bash(docker version *)",
+      "Bash(docker info *)",
+      "Bash(Select-String -Pattern \"Username\")",
+      "Bash(echo \"exit: $?\")",
+      "Bash(docker push *)"
     ]
   }
 }

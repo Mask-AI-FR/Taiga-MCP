@@ -1,0 +1,33 @@
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Secrets & local config
+.env
+*.env
+!.env.example
+
+# Git & tooling
+.git/
+.gitignore
+.claude/
+
+# Editor / OS cruft
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docs & scripts not needed at runtime
+README.md
+CLAUDE.md
+*.bat

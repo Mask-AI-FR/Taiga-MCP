@@ -6,8 +6,8 @@ load_dotenv()
 
 mcp = FastMCP(
     "Taiga MCP Server",
-    host="127.0.0.1",
-    port=8000,
+    host=os.getenv("MCP_HOST", "127.0.0.1"),
+    port=int(os.getenv("MCP_PORT", "8000")),
     streamable_http_path="/mcp",
 )
 

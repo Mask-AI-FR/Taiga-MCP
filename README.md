@@ -25,6 +25,7 @@ Manage projects, sprints, user stories, tasks, and issues in Taiga directly from
 - [Installation](#-installation)
 - [Configuration](#-configuration)
 - [Running the Server](#-running-the-server)
+- [Running with Docker](#-running-with-docker)
 - [Connecting an MCP Client](#-connecting-an-mcp-client)
 - [Available Tools](#-available-tools)
 - [Usage Examples](#-usage-examples)
@@ -173,12 +174,50 @@ http://127.0.0.1:8000/mcp
 
 If the Taiga client fails to initialize (bad credentials, unreachable host), the error is printed to **stderr** and the process keeps running so the failure is visible to the client.
 
-| Setting | Default | Where |
-|---------|---------|-------|
-| Host | `127.0.0.1` | `Server.py` |
-| Port | `8000` | `Server.py` |
+| Setting | Default | Override |
+|---------|---------|----------|
+| Host | `127.0.0.1` | `MCP_HOST` env var |
+| Port | `8000` | `MCP_PORT` env var |
 | Path | `/mcp` | `Server.py` |
 | Transport | `streamable-http` | `Server.py` |
+
+> The host/port are read from the `MCP_HOST` / `MCP_PORT` environment variables, falling back to the defaults above. The Docker image sets `MCP_HOST=0.0.0.0` so the port is reachable from the host.
+
+---
+
+## 🐳 Running with Docker
+
+The repository ships with a `Dockerfile` and `docker-compose.yml` for containerized deployment. The image runs as a non-root user and binds to `0.0.0.0` inside the container.
+
+### Using Docker Compose (recommended)
+
+Make sure your `.env` file is populated (see [Configuration](#-configuration)), then:
+
+```bash
+docker compose up -d --build
+```
+
+The server is published on `http://127.0.0.1:8000/mcp`. View logs and stop with:
+
+```bash
+docker compose logs -f
+docker compose down
+```
+
+### Using the Docker CLI
+
+```bash
+# Build the image
+docker build -t taiga-mcp-server .
+
+# Run it, passing configuration from your .env file
+docker run -d --name taiga-mcp-server \
+  --env-file .env \
+  -p 8000:8000 \
+  taiga-mcp-server
+```
+
+> The container reads the same environment variables as the local setup — `TAIGA_BASE_URL`, plus either `TAIGA_TOKEN` or `TAIGA_USERNAME`/`TAIGA_PASSWORD`. `MCP_HOST`/`MCP_PORT` are preset for container networking.
 
 ---
 
@@ -313,6 +352,9 @@ MyMcp/
 │       ├── client.py          # TaigaClient — REST API v1 wrapper
 │       └── tools.py           # register_tools() — MCP tool definitions
 ├── requirements.txt           # Python dependencies
+├── Dockerfile                 # Container image definition
+├── docker-compose.yml         # One-command containerized run
+├── .dockerignore              # Build context exclusions
 ├── .env.example               # Configuration template
 ├── InstallRequirments.bat     # Create venv + install deps (Windows)
 ├── LauncheServer.bat          # Activate the venv (Windows)
